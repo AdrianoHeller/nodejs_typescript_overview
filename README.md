@@ -15,6 +15,8 @@ This is the public repository for the source code management of the coding video
 - Docker Overview
 - Run MongoDB via Docker
 - Insert Data inside container and connect to MongoDB Compass
+- DB Client connection
+- DB Services CRUD
 
 ## Ref to create req.cnf and openssl config:
 
@@ -46,10 +48,6 @@ OpenSSL cli command(must be ran inside security folder):
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
  -keyout cert.key -out cert.pem -config req.cnf -sha256
 ```
-
-- DB Client connection
-
-- DB Services CRUD
 
 ## Steps to be done
 
