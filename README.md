@@ -47,10 +47,12 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
  -keyout cert.key -out cert.pem -config req.cnf -sha256
 ```
 
+- DB Client connection
+
+- DB Services CRUD
+
 ## Steps to be done
 
-- DB Client connection
-- DB Services CRUD
 - Models
 
 ### This list can grow, the idea is not to be closed, but creating content in a open manner.
