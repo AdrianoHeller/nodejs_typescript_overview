@@ -1,6 +1,0 @@
-exit
-db.users.insertOne({ "name": "Sarah Connor", "age": 42, "isTerminated": false, "hasWallet": true, "email": "s.connor@skynet.com" })
-db.users.insertOne({ "name": "John Connor", "age": 17, "isTerminated": false, "hasWallet": false, "email": "connor@skynet.com" })
-db.createCollection('users')
-use bank
-use admin
