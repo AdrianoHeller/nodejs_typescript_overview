@@ -1,7 +1,7 @@
-import { config } from 'dotenv';
+// import { config } from 'dotenv';
 import { MongoClient } from 'mongodb';
 
-config();
+// config();
 
 export const conn = new MongoClient(process.env.DB_URI!);
 

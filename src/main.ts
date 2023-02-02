@@ -1,4 +1,4 @@
-import { config } from 'dotenv';
+// import { config } from 'dotenv';
 import {
 	createServer as HTTPServer,
 	IncomingMessage,
@@ -10,7 +10,7 @@ import { HandleRequestProcess } from './handlers';
 import { createServer as HTTPSServer } from 'https';
 import { certificateData } from './https/certificate';
 
-config();
+// config();
 
 HTTPServer((req: IncomingMessage, res: ServerResponse) => {
 	HandleRequestProcess(req, res);
