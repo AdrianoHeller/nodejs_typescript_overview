@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  node-app:
+    build:
+      context: .
+    ports:
+      - ${HTTP_PORT}:${HTTP_PORT}  
+      - ${HTTPS_PORT}:${HTTPS_PORT}
+    restart: unless-stopped
+    depends_on:
+      - mongo-node
+  mongo-node:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminpass
+    volumes:
+      - ~/jobs/projects/node_ts/data:/data/db
+    restart: always    
