@@ -21,6 +21,8 @@ This is the public repository for the source code management of the coding video
 - Insert Data inside container and connect to MongoDB Compass
 - DB Client connection
 - DB Services CRUD
+- docker-compose configuration
+- Fix PID 0 bug with tini
 
 ## Ref to create req.cnf and openssl config:
 
