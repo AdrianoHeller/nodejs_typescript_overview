@@ -2,6 +2,10 @@
 
 This is the public repository for the source code management of the coding videos.
 
+## Playlist:
+
+[Youtube Playlist](https://www.youtube.com/playlist?list=PL73hutso4uqmcrq3OfgGKO_wKw3x_g5tY)
+
 ## Steps Coded 'til now:
 
 - Native HTTP Server
