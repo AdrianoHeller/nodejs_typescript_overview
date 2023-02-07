@@ -1,7 +1,7 @@
-export const BodyParser = (buffer: string): Object => {
+export const BodyParser = (buffer: string): Record<string, unknown> => {
 	try {
 		const validBuffer: boolean = buffer.length > 0;
-		return validBuffer ? JSON.parse(buffer) : new Object();
+		return validBuffer ? JSON.parse(buffer) : {};
 	} catch (err) {
 		return {};
 	}
