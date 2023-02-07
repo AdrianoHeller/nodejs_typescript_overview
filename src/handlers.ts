@@ -7,7 +7,7 @@ import { Router } from './router';
 export const HandleRouteMethod = (
 	router: IRouter,
 	customReq: ICustomReq,
-	res: ServerResponse
+	res: ServerResponse,
 ) => {
 	const { path } = customReq;
 	return Object.keys(router).includes(path)
@@ -17,14 +17,14 @@ export const HandleRouteMethod = (
 
 export const HandleValidMethod = (
 	req: ICustomReq,
-	validMethod: string
+	validMethod: string,
 ): boolean => {
 	return req.method === validMethod;
 };
 
 export function HandleRequestProcess(
 	req: IncomingMessage,
-	res: ServerResponse
+	res: ServerResponse,
 ): void {
 	const { method, headers } = req;
 	const baseURL: string = `http://${headers.host}`;
@@ -37,7 +37,7 @@ export function HandleRequestProcess(
 
 	const decoder = new StringDecoder('utf-8');
 
-	req.on('data', (data) => {
+	req.on('data', data => {
 		bufferString += decoder.write(data);
 	});
 

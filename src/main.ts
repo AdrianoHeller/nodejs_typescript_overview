@@ -12,14 +12,13 @@ import { certificateData } from './https/certificate';
 
 // config();
 
-HTTPServer((req: IncomingMessage, res: ServerResponse) => {
-	HandleRequestProcess(req, res);
-}).listen(process.env.HTTP_PORT, () =>
-	console.log(`HTTP server listening on ${process.env.HTTP_PORT}`)
+HTTPServer((req: IncomingMessage, res: ServerResponse) =>
+	HandleRequestProcess(req, res),
+).listen(process.env.HTTP_PORT, () =>
+	console.log(`HTTP server listening on ${process.env.HTTP_PORT}`),
 );
-
-HTTPSServer(certificateData, (req: IncomingMessage, res: ServerResponse) => {
-	HandleRequestProcess(req, res);
-}).listen(process.env.HTTPS_PORT, () =>
-	console.log(`HTTPS server listening on ${process.env.HTTPS_PORT}`)
+HTTPSServer(certificateData, (req: IncomingMessage, res: ServerResponse) =>
+	HandleRequestProcess(req, res),
+).listen(process.env.HTTPS_PORT, () =>
+	console.log(`HTTPS server listening on ${process.env.HTTPS_PORT}`),
 );
