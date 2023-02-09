@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  api:
+  service:
     build:
       context: .
     ports:
@@ -9,8 +9,8 @@ services:
       - ${HTTPS_PORT}:${HTTPS_PORT}
     restart: unless-stopped
     depends_on:
-      - db
-  db:
+      - database
+  database:
     image: mongo
     ports:
       - "27017:27017"

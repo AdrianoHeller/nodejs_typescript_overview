@@ -6,7 +6,7 @@ WORKDIR /usr/app
 
 ENV HTTP_PORT=5500
 ENV HTTPS_PORT=5600
-ENV DB_URI=mongodb://admin:adminpass@db:27017
+ENV DB_URI=mongodb://admin:adminpass@database:27017
 
 EXPOSE ${HTTP_PORT}
 EXPOSE ${HTTPS_PORT}
