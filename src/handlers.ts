@@ -56,3 +56,15 @@ export function HandleRequestProcess(
 		HandleRouteMethod(Router, customReq, res);
 	});
 }
+
+export const HandleResponse = (
+	res: ServerResponse,
+	statusCode: number,
+	targetKey: string,
+	data: any,
+): void => {
+	res.setHeader('Content-Type', 'application/json');
+	res.writeHead(statusCode);
+	res.end(JSON.stringify({ [targetKey]: data }));
+	return;
+};

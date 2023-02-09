@@ -1,35 +1,44 @@
-import { HandleValidMethod } from './handlers';
+import { HandleResponse, HandleValidMethod } from './handlers';
 import { IRouter } from './interfaces';
 import { conn } from './external/dbConn';
-import { GetAllUsers } from './service';
+import { GetAllUsers, GetSingleUserByID } from './service';
+import { ObjectId } from 'mongodb';
 
 export const Router: IRouter = {
 	'/': (customReq, res) => {
 		if (!HandleValidMethod(customReq, 'GET')) {
-			res.writeHead(405);
-			res.end(JSON.stringify({ message: 'Method not allowed' }));
-			return;
+			HandleResponse(res, 405, 'message', 'Method not Allowed');
 		}
-		res.writeHead(200);
-		res.end(JSON.stringify({ message: 'OK' }));
-		return;
+		HandleResponse(res, 200, 'message', 'Ok');
 	},
-	'/users': async (customReq, res): Promise<any> => {
+	'/users': async (_, res): Promise<any> => {
 		try {
 			const getUsers = await GetAllUsers(conn, 'bank', 'users');
-			res.setHeader('Content-Type', 'application/json');
-			res.writeHead(200);
-			res.end(JSON.stringify({ data: getUsers }));
-			return;
+			HandleResponse(res, 200, 'data', getUsers);
 		} catch (err) {
-			res.writeHead(500);
-			res.end(JSON.stringify({ data: err }));
-			return;
+			HandleResponse(res, 500, 'data', err);
+		}
+	},
+	'/user': async (customReq, res): Promise<any> => {
+		try {
+			const { query } = customReq;
+			const id = query.get('id');
+			const validRequest = id?.length! > 0;
+			if (!validRequest) {
+				HandleResponse(res, 400, 'error', 'Bad Request');
+			}
+			const getUser = await GetSingleUserByID(
+				conn,
+				'bank',
+				'users',
+				new ObjectId(id!),
+			);
+			HandleResponse(res, 200, 'data', getUser);
+		} catch (err) {
+			HandleResponse(res, 500, 'data', err);
 		}
 	},
 	'/notFound': (_, res) => {
-		res.writeHead(404);
-		res.end(JSON.stringify({ message: 'File not Found' }));
-		return;
+		HandleResponse(res, 404, 'message', 'File not Found');
 	},
 };
