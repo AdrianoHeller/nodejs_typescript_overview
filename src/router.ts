@@ -2,31 +2,34 @@ import { HandleValidMethod } from './handlers';
 import { IRouter } from './interfaces';
 import { conn } from './external/dbConn';
 import { GetAllUsers } from './service';
-import {
-	FileNotFound,
-	HandleResponse,
-	MethodNotAllowed,
-	StatusOK,
-} from './helpers';
-import { ObjectId } from 'bson';
 
 export const Router: IRouter = {
 	'/': (customReq, res) => {
 		if (!HandleValidMethod(customReq, 'GET')) {
-			HandleResponse(res, 405, MethodNotAllowed, 'message');
+			res.writeHead(405);
+			res.end(JSON.stringify({ message: 'Method not allowed' }));
+			return;
 		}
-		HandleResponse(res, 200, StatusOK, 'message');
+		res.writeHead(200);
+		res.end(JSON.stringify({ message: 'OK' }));
+		return;
 	},
-	'/users': async (_, res): Promise<any> => {
+	'/users': async (customReq, res): Promise<any> => {
 		try {
 			const getUsers = await GetAllUsers(conn, 'bank', 'users');
-			HandleResponse(res, 200, getUsers, 'data');
+			res.setHeader('Content-Type', 'application/json');
+			res.writeHead(200);
+			res.end(JSON.stringify({ data: getUsers }));
+			return;
 		} catch (err) {
-			HandleResponse(res, 500, err, 'error');
+			res.writeHead(500);
+			res.end(JSON.stringify({ data: err }));
+			return;
 		}
 	},
-
 	'/notFound': (_, res) => {
-		HandleResponse(res, 404, FileNotFound, 'message');
+		res.writeHead(404);
+		res.end(JSON.stringify({ message: 'File not Found' }));
+		return;
 	},
 };
